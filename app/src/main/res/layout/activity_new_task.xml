@@ -5,24 +5,27 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textViewAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="190dp"
-        android:layout_marginBottom="624dp"
+        android:layout_marginEnd="187dp"
+        android:layout_marginBottom="531dp"
         android:text="Enter task name" />
 
     <EditText
+        android:id="@+id/editTextTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="212dp"
-        android:layout_marginBottom="544dp"
+        android:layout_marginEnd="206dp"
+        android:layout_marginBottom="453dp"
         android:hint="name" />
 
     <Button
+        android:id="@+id/btnAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
