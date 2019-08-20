@@ -8,30 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.FirebaseApiNotAvailableException;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-public class NewTask extends AppCompatActivity {
-
-    TextView tvEnterName;
-    EditText etEnterName;
-    Button btnAddTask;
-
-    Task task;
-    DatabaseReference databaseReference;
+public class ActivityTaskDetails extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_task);
-
+        setContentView(R.layout.activity_task_details);
+        setUpFragments();
         setUpUi();
     }
 
@@ -75,28 +59,15 @@ public class NewTask extends AppCompatActivity {
         builder.show();
     }
 
-    public void setUpUi(){
-
-        tvEnterName = findViewById(R.id.tvEnterName);
-        etEnterName = findViewById(R.id.etEnterName);
-        btnAddTask = findViewById(R.id.btnAddTask);
-        task = new Task();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
-        btnAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent explicitIntent = new Intent();
-                explicitIntent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(explicitIntent);
-                task.setName(etEnterName.getText().toString().trim());
-                databaseReference.push().setValue(task);
-                displayToast("data inserted");
-            }
-        });
+    private void setUpUi(){
 
     }
 
-    private void displayToast(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+
+    private void setUpFragments() {
+
+
+
     }
+
 }

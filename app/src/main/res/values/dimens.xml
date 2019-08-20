@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginMedium">20dp</dimen>
+    <dimen name="elevationMedium">10dp</dimen>
+    <dimen name="new_task_tvMarginTop">50dp</dimen>
+    <dimen name="new_task_etMargin">30dp</dimen>
+    <dimen name="new_task_tvEnterName">30sp</dimen>
+    <dimen name="new_task_etEnterNameWeight">200sp</dimen>
+    <dimen name="new_task_btnAddWeight">140sp</dimen>
+    <dimen name="new_task_btnAddHeight">70sp</dimen>
+</resources>
