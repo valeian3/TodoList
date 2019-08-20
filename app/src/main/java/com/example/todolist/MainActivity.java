@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent explicitIntent = new Intent();
                 explicitIntent.setClass(getApplicationContext(), NewTask.class);
                 startActivity(explicitIntent);
-                displayToast("NewTask Activity opened.");
+                displayToast("Activity for adding tasks opened.");
             }
         });
     }
