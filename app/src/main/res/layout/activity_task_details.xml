@@ -3,23 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:baselineAligned="false">
 
     <RelativeLayout
         android:id="@+id/flText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:name="com.example.todolist.DescriptionText">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/flList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:name="com.example.todolist.SubTaskList">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
     </RelativeLayout>
 

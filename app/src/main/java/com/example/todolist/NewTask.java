@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -63,9 +64,9 @@ public class NewTask extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.create();
-        builder.setTitle("About aplication")
-                .setMessage("This aplication is made by student Valerian Bahnik. \n" +
-                        "Aplication is ment to be used for simple to do lists.")
+        builder.setTitle("About application")
+                .setMessage("This application is made by student Valerian Bahnik. \n" +
+                        "Application is meant to be used for simple to do lists.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -85,12 +86,18 @@ public class NewTask extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent explicitIntent = new Intent();
-                explicitIntent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(explicitIntent);
-                task.setName(etEnterName.getText().toString().trim());
-                databaseReference.push().setValue(task);
-                displayToast("data inserted");
+                String taskName = etEnterName.getText().toString().trim();
+                if(!TextUtils.isEmpty(taskName)){
+                    task.setName(taskName);
+                    databaseReference.push().setValue(task);
+                    displayToast("Task inserted into database");
+
+                    Intent explicitIntent = new Intent();
+                    explicitIntent.setClass(getApplicationContext(), MainActivity.class);
+                    startActivity(explicitIntent);
+                } else {
+                    displayToast("Task name cannot stay empty.");
+                }
             }
         });
 

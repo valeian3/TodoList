@@ -3,4 +3,8 @@
     <string name="new_task_tvEnterName">Enter task name</string>
     <string name="new_task_etEnterName">Name</string>
     <string name="new_task_btnAdd">Add</string>
+    <string name="tvSubTaskName">Enter Subtask name</string>
+    <string name="tvDescription">Enter tasks that have to be done.</string>
+    <string name="fHint">name</string>
+    <string name="fBtnDone">Done</string>
 </resources>

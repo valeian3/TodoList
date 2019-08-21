@@ -8,4 +8,7 @@
     <dimen name="new_task_etEnterNameWeight">200sp</dimen>
     <dimen name="new_task_btnAddWeight">140sp</dimen>
     <dimen name="new_task_btnAddHeight">70sp</dimen>
+    <dimen name="fDescription">0sp</dimen>
+    <dimen name="fEditTextWight">100sp</dimen>
+    <dimen name="fBtnAddSubTask">200sp</dimen>
 </resources>

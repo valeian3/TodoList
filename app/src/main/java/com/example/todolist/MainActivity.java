@@ -153,9 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.create();
-        builder.setTitle("About aplication")
-                .setMessage("This aplication is made by student Valerian Bahnik. \n" +
-                        "Aplication is ment to be used for simple to do lists.")
+        builder.setTitle("About application")
+                .setMessage("This application is made by student Valerian Bahnik. \n" +
+                        "Application is meant to be used for simple to do lists.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-
     }
 
     private void displayToast(String message){

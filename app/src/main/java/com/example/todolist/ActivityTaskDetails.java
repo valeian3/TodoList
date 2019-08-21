@@ -2,6 +2,9 @@ package com.example.todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +20,10 @@ public class ActivityTaskDetails extends AppCompatActivity{
         setContentView(R.layout.activity_task_details);
         setUpFragments();
         setUpUi();
+    }
+
+    private void setUpUi(){
+
     }
 
     @Override
@@ -47,9 +54,9 @@ public class ActivityTaskDetails extends AppCompatActivity{
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.create();
-        builder.setTitle("About aplication")
-                .setMessage("This aplication is made by student Valerian Bahnik. \n" +
-                        "Aplication is ment to be used for simple to do lists.")
+        builder.setTitle("About application")
+                .setMessage("This application is made by student Valerian Bahnik. \n" +
+                        "Application is meant to be used for simple to do lists.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -59,15 +66,13 @@ public class ActivityTaskDetails extends AppCompatActivity{
         builder.show();
     }
 
-    private void setUpUi(){
-
-    }
-
-
     private void setUpFragments() {
 
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.flText,new DescriptionText());
+        fragmentTransaction.add(R.id.flList, new SubTaskList());
+        fragmentTransaction.commit();
 
     }
-
 }
