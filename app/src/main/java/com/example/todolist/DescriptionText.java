@@ -45,14 +45,33 @@ public class DescriptionText extends Fragment {
         btnDone = layout.findViewById(R.id.btnDone);
 
         SubTask = new SubTask();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("SubTask");
+
+//        Intent intent = new Intent();
+//
+//
+//
+//        Bundle bundle = this.getArguments();
+//        if(bundle!=null){
+//            String id = bundle.getString(MainActivity.TASK_ID, "null");
+//            String name = bundle.getString(MainActivity.TASK_NAME,"null");
+//        }
+//
+//        String id = bundle.getString(MainActivity.TASK_ID);
+//        String name = bundle.getString(MainActivity.TASK_NAME);
+
+//        tvNameTask.setText(name);
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("SubTask");
         btnAddSubTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String taskName = etSubTaskName.getText().toString().trim();
-                if(!TextUtils.isEmpty(taskName)){
-                    SubTask.setName(taskName);
-                    databaseReference.push().setValue(SubTask);
+                String subTaskName = etSubTaskName.getText().toString().trim();
+                if(!TextUtils.isEmpty(subTaskName)){
+
+                    String id = databaseReference.push().getKey();
+
+                    SubTask = new SubTask(id, subTaskName);
+                    databaseReference.child(id).setValue(SubTask);
                     displayToast("Task inserted into database");
                     etSubTaskName.getText().clear();
                 } else {

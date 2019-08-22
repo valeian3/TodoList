@@ -81,15 +81,20 @@ public class NewTask extends AppCompatActivity {
         tvEnterName = findViewById(R.id.tvEnterName);
         etEnterName = findViewById(R.id.etEnterName);
         btnAddTask = findViewById(R.id.btnAddTask);
+
         task = new Task();
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String taskName = etEnterName.getText().toString().trim();
                 if(!TextUtils.isEmpty(taskName)){
-                    task.setName(taskName);
-                    databaseReference.push().setValue(task);
+
+                    String id = databaseReference.push().getKey();
+
+                    task = new Task(id, taskName);
+                    databaseReference.child(id).setValue(task);
                     displayToast("Task inserted into database");
 
                     Intent explicitIntent = new Intent();

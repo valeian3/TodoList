@@ -7,7 +7,8 @@
     <ListView
         android:id="@+id/lvTasks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:longClickable="true">
     </ListView>
 
     <android.support.design.widget.FloatingActionButton

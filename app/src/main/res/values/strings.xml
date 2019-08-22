@@ -7,4 +7,7 @@
     <string name="tvDescription">Enter tasks that have to be done.</string>
     <string name="fHint">name</string>
     <string name="fBtnDone">Done</string>
+    <string name="dialogHint">Enter new task name</string>
+    <string name="dialogBtnUpdate">Update</string>
+    <string name="dialogBtnDelete">Delete</string>
 </resources>

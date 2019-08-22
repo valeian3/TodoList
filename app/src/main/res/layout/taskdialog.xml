@@ -10,17 +10,17 @@
         android:id="@+id/etNewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter new task name"
+        android:hint="@string/dialogHint"
         android:inputType="text" />
 
     <Button
         android:id="@+id/btnAddNewName"
-        android:text="Update"
+        android:text="@string/dialogBtnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/btnDeleteTask"
-        android:text="Update"
+        android:text="@string/dialogBtnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

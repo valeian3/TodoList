@@ -61,6 +61,7 @@ public class SubTaskList extends Fragment {
                 subList.clear();
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
+
                     SubTask = ds.getValue(SubTask.class);
                     subList.add(SubTask.getName().toString());
                 }
@@ -77,16 +78,16 @@ public class SubTaskList extends Fragment {
         lvSubTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SubTask = subTasks.get(position);
-                showUpdateDialog(view, SubTask.getName());
+
+                showDeleteDialog(view, SubTask.getName());
             }
         });
 
     }
 
-    private void deleteTask(String name){
+    private void deleteSubTask(String sName){
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(name);
+        databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(sName);
 
         databaseReference.removeValue();
 
@@ -94,30 +95,30 @@ public class SubTaskList extends Fragment {
 
     }
 
-    private void showUpdateDialog(View layout, final String subTaskName){
+    private void showDeleteDialog(View layout, final String subTaskName){
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getLayoutInflater();
 
-        final View dialogView = inflater.inflate(R.layout.taskdialog,null);
+        final View dialogView = inflater.inflate(R.layout.subtaskdialog,null);
         dialogBuilder.setView(dialogView);
 
-        final Button btnDeleteTask;
+        final Button btnDeleteSubTask;
 
-        btnDeleteTask = layout.findViewById(R.id.btnDeleteTask);
+        btnDeleteSubTask = layout.findViewById(R.id.btnDeleteSubTask);
 
-        dialogBuilder.setTitle("Deleting "+ subTaskName + " name.");
+        dialogBuilder.setTitle("Deleting "+ subTaskName);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteTask(subTaskName);
-                alertDialog.dismiss();
-            }
-        });
+//        btnDeleteSubTask.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                deleteSubTask(subTaskName);
+//                alertDialog.dismiss();
+//            }
+//        });
     }
 
     private void displayToast(String message){

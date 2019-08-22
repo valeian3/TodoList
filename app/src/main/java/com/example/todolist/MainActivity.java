@@ -31,6 +31,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TASK_ID = "taskId";
+    public static final String TASK_NAME = "taskName";
+
+    public static Bundle bundle;
+
     ListView lvTasks;
     FloatingActionButton addNewTaskBtn;
     FirebaseDatabase database;
@@ -69,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
     private void setUpUi(){
 
         task = new Task();
+
         lvTasks = findViewById(R.id.lvTasks);
         database = FirebaseDatabase.getInstance();
+
         databaseReference = database.getReference("Task");
         list = new ArrayList<>();
         adapter = new ArrayAdapter<>(this,R.layout.item_list,R.id.tvTaskName, list);
@@ -93,11 +100,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lvTasks.setLongClickable(true);
+
         lvTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+//                task = tasks.get(position);
+
                 Intent intent = new Intent(view.getContext(),ActivityTaskDetails.class);
                 startActivity(intent);
+
+//                bundle = new Bundle();
+//                bundle.putString(TASK_ID, task.getTaskId());
+//                bundle.putString(TASK_NAME, task.getName());
+//                DescriptionText descriptionText = new DescriptionText();
+//
+//                descriptionText.setArguments(bundle);
             }
         });
 
@@ -105,11 +124,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                task = tasks.get(position);
+                showUpdateDialog(task.getTaskId(), task.getName());
 
-                showUpdateDialog(task.getName());
-
-                return false;
+                return true;
             }
         });
 
@@ -124,29 +141,6 @@ public class MainActivity extends AppCompatActivity {
                 displayToast("Activity for adding tasks opened.");
             }
         });
-    }
-
-    private boolean updateTaskName(String name){
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(name);
-
-        Task task = new Task(name);
-
-        databaseReference.setValue(task);
-
-        displayToast("Task name changed.");
-
-        return true;
-    }
-
-    private void deleteTask(String name){
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(name);
-
-        databaseReference.removeValue();
-
-        displayToast("Task deleted.");
-
     }
 
     private void showAboutDialog(){
@@ -165,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void showUpdateDialog(final String taskName){
+    private void showUpdateDialog(final String id, final String taskName){
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
 
         final View dialogView = inflater.inflate(R.layout.taskdialog,null);
@@ -181,34 +175,45 @@ public class MainActivity extends AppCompatActivity {
         btnAddNewName = findViewById(R.id.btnAddNewName);
         btnDeleteTask = findViewById(R.id.btnDeleteTask);
 
-        dialogBuilder.setTitle("Updating "+ taskName + " name.");
+        dialogBuilder.setTitle("Renaming "+ taskName + " name:");
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        btnAddNewName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = etNewName.getText().toString().trim();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
 
-                if(TextUtils.isEmpty(name)){
-                    etNewName.setError("Name required");
-                    return;
-                }
+//        btnAddNewName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                String taskName = etNewName.getText().toString().trim();
+//
+//                if(!TextUtils.isEmpty(taskName)) {
+//
+//                    String id = databaseReference.push().getKey();
+//
+//                    task = new Task(id, taskName);
+//                    databaseReference.child(id).setValue(task);
+//                    displayToast("Renamed task.");
+//                    alertDialog.dismiss();
+//                }  else {
+//                    displayToast("Task name cannot stay empty.");
+//                }
+//            }
+//        });
 
-                updateTaskName(name);
-
-                alertDialog.dismiss();
-            }
-        });
-
-        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteTask(taskName);
-                alertDialog.dismiss();
-            }
-        });
+//        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(id);
+//
+//                databaseReference.removeValue();
+//
+//                displayToast("Task deleted.");
+//                alertDialog.dismiss();
+//            }
+//        });
     }
 
     private void displayToast(String message){
