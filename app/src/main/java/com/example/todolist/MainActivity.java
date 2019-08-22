@@ -171,9 +171,9 @@ public class MainActivity extends AppCompatActivity {
         final Button btnAddNewName;
         final Button btnDeleteTask;
 
-        etNewName = findViewById(R.id.etNewName);
-        btnAddNewName = findViewById(R.id.btnAddNewName);
-        btnDeleteTask = findViewById(R.id.btnDeleteTask);
+        etNewName = dialogView.findViewById(R.id.etNewName);
+        btnAddNewName = dialogView.findViewById(R.id.btnAddNewName);
+        btnDeleteTask = dialogView.findViewById(R.id.btnDeleteTask);
 
         dialogBuilder.setTitle("Renaming "+ taskName + " name:");
 
@@ -182,38 +182,39 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
 
-//        btnAddNewName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String taskName = etNewName.getText().toString().trim();
-//
-//                if(!TextUtils.isEmpty(taskName)) {
-//
-//                    String id = databaseReference.push().getKey();
-//
-//                    task = new Task(id, taskName);
-//                    databaseReference.child(id).setValue(task);
-//                    displayToast("Renamed task.");
-//                    alertDialog.dismiss();
-//                }  else {
-//                    displayToast("Task name cannot stay empty.");
-//                }
-//            }
-//        });
+        btnAddNewName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(id);
-//
-//                databaseReference.removeValue();
-//
-//                displayToast("Task deleted.");
-//                alertDialog.dismiss();
-//            }
-//        });
+                String newTaskName = etNewName.getText().toString().trim();
+
+                if(!TextUtils.isEmpty(newTaskName)) {
+
+                    String id = databaseReference.push().getKey();
+
+                    task = new Task(id, newTaskName);
+                    databaseReference.child(id).setValue(task);
+
+                    displayToast("Renamed task.");
+                    alertDialog.dismiss();
+                }  else {
+                    displayToast("Task name cannot stay empty.");
+                }
+            }
+        });
+
+        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(id);
+
+                databaseReference.removeValue();
+
+                displayToast("Task deleted.");
+                alertDialog.dismiss();
+            }
+        });
     }
 
     private void displayToast(String message){

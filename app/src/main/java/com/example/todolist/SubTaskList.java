@@ -79,23 +79,13 @@ public class SubTaskList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                showDeleteDialog(view, SubTask.getName());
+                showDeleteDialog(SubTask.getSubTaskId(), SubTask.getName());
             }
         });
 
     }
 
-    private void deleteSubTask(String sName){
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(sName);
-
-        databaseReference.removeValue();
-
-        displayToast("Task deleted.");
-
-    }
-
-    private void showDeleteDialog(View layout, final String subTaskName){
+    private void showDeleteDialog(final String id, final String subTaskName){
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getLayoutInflater();
@@ -105,20 +95,24 @@ public class SubTaskList extends Fragment {
 
         final Button btnDeleteSubTask;
 
-        btnDeleteSubTask = layout.findViewById(R.id.btnDeleteSubTask);
+        btnDeleteSubTask = dialogView.findViewById(R.id.btnDeleteSubTask);
 
         dialogBuilder.setTitle("Deleting "+ subTaskName);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-//        btnDeleteSubTask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deleteSubTask(subTaskName);
-//                alertDialog.dismiss();
-//            }
-//        });
+        btnDeleteSubTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(id);
+
+                databaseReference.removeValue();
+
+                alertDialog.dismiss();
+            }
+        });
     }
 
     private void displayToast(String message){
