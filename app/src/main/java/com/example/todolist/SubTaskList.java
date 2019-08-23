@@ -120,7 +120,7 @@ public class SubTaskList extends Fragment {
 
                 String taskId = intent.getStringExtra(MainActivity.TASK_ID);
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(taskId);
+                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(taskId).child(id);
 
                 databaseReference.removeValue();
 
