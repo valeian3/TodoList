@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference  databaseReference;
     ArrayList<String> list;
-    List<Task> tasks;
+    ArrayList<Task> tasks;
     ArrayAdapter<String> adapter;
     Task task;
 
@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         task = new Task();
 
-        lvTasks = findViewById(R.id.lvTasks);
-        database = FirebaseDatabase.getInstance();
-
-        databaseReference = database.getReference("Task");
         list = new ArrayList<>();
+        tasks = new ArrayList<>();
+
+        lvTasks = findViewById(R.id.lvTasks);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Task");
         adapter = new ArrayAdapter<>(this,R.layout.item_list,R.id.tvTaskName, list);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
                     task = ds.getValue(Task.class);
-                    list.add(task.getName().toString());
+                    list.add(task.getName());
+                    tasks.add(task);
                 }
                 lvTasks.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -106,23 +109,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//                task = tasks.get(position);
+                task = tasks.get(position);
 
                 Intent intent = new Intent(view.getContext(),ActivityTaskDetails.class);
-                startActivity(intent);
 
-//                bundle = new Bundle();
-//                bundle.putString(TASK_ID, task.getTaskId());
-//                bundle.putString(TASK_NAME, task.getName());
-//                DescriptionText descriptionText = new DescriptionText();
-//
-//                descriptionText.setArguments(bundle);
+                intent.putExtra(TASK_ID, task.getTaskId());
+                intent.putExtra(TASK_NAME, task.getName());
+
+                startActivity(intent);
             }
         });
 
         lvTasks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                task = tasks.get(position);
 
                 showUpdateDialog(task.getTaskId(), task.getName());
 
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(task.getTaskId());
 
         btnAddNewName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,10 +192,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(newTaskName)) {
 
-                    String id = databaseReference.push().getKey();
 
-                    task = new Task(id, newTaskName);
-                    databaseReference.child(id).setValue(task);
+                    task = new Task(task.getTaskId() ,newTaskName);
+                    databaseReference.setValue(task);
 
                     displayToast("Renamed task.");
                     alertDialog.dismiss();
@@ -208,7 +209,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("Task").child(id);
-
+                databaseReference.removeValue();
+                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(task.getTaskId());
                 databaseReference.removeValue();
 
                 displayToast("Task deleted.");

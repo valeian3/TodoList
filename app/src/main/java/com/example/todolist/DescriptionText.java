@@ -46,22 +46,14 @@ public class DescriptionText extends Fragment {
 
         SubTask = new SubTask();
 
-//        Intent intent = new Intent();
-//
-//
-//
-//        Bundle bundle = this.getArguments();
-//        if(bundle!=null){
-//            String id = bundle.getString(MainActivity.TASK_ID, "null");
-//            String name = bundle.getString(MainActivity.TASK_NAME,"null");
-//        }
-//
-//        String id = bundle.getString(MainActivity.TASK_ID);
-//        String name = bundle.getString(MainActivity.TASK_NAME);
+        Intent intent = getActivity().getIntent();
 
-//        tvNameTask.setText(name);
+        String taskId = intent.getStringExtra(MainActivity.TASK_ID);
+        String name = intent.getStringExtra(MainActivity.TASK_NAME);
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("SubTask");
+        tvDescription.setText(name);
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(taskId);
         btnAddSubTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

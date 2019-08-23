@@ -35,7 +35,7 @@ public class SubTaskList extends Fragment {
     DatabaseReference databaseReference;
     ArrayList<String> subList;
     ArrayAdapter<String> SubAdapter;
-    List<SubTask> subTasks;
+    ArrayList<SubTask> subTasks;
     SubTask SubTask;
 
     @Nullable
@@ -50,11 +50,18 @@ public class SubTaskList extends Fragment {
     private void setUpUi(View layout){
 
         lvSubTasks = layout.findViewById(R.id.lvSubTasks);
+
         SubTask = new SubTask();
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("SubTask");
         subList = new ArrayList<>();
-        SubAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, subList);
+        subTasks = new ArrayList<>();
+
+        Intent intent = getActivity().getIntent();
+
+        String taskId = intent.getStringExtra(MainActivity.TASK_ID);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("SubTask").child(taskId);
+        SubAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, subList);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,7 +70,8 @@ public class SubTaskList extends Fragment {
                 {
 
                     SubTask = ds.getValue(SubTask.class);
-                    subList.add(SubTask.getName().toString());
+                    subList.add(SubTask.getName());
+                    subTasks.add(SubTask);
                 }
                 lvSubTasks.setAdapter(SubAdapter);
                 SubAdapter.notifyDataSetChanged();
@@ -78,6 +86,8 @@ public class SubTaskList extends Fragment {
         lvSubTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                SubTask = subTasks.get(position);
 
                 showDeleteDialog(SubTask.getSubTaskId(), SubTask.getName());
             }
@@ -106,7 +116,11 @@ public class SubTaskList extends Fragment {
             @Override
             public void onClick(View v) {
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(id);
+                Intent intent = getActivity().getIntent();
+
+                String taskId = intent.getStringExtra(MainActivity.TASK_ID);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(taskId);
 
                 databaseReference.removeValue();
 
