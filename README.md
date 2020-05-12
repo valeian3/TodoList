@@ -2,16 +2,20 @@
 
 Simple aplication for adding task that you dont want to forget.
 
-# Screenshots of aplication
+## Things to fix(not working properly)
+
+When adding subtask program adds each subtask as a new list. When deleted subtask gets deleted, it remembers it and you cannot delete next subtask because deleted one was remembered and saved somewhere.
+
+# Screenshots of application
 
 * Home page
 
-![first](Look/first.png) 
+<img src="Look/first.png" width="250"> 
 
 * Adding task screen
 
-![second](Look/second.png)
+<img src="Look/second.png" width="250"> 
 
 * Adding subtask screen
 
-![third](Look/third.png)
+<img src="Look/third.png" width="250">
