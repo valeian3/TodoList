@@ -8,7 +8,7 @@ When adding subtask program adds each subtask as a new list. When deleted subtas
 
 # Screenshots of application
 
-* Home page
+* Home screen
 
 <img src="Look/first.png" width="250"> 
 
