@@ -4,34 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvEnterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/new_task_tvMarginTop"
+    <RelativeLayout
         android:layout_centerHorizontal="true"
-        android:text="@string/new_task_tvEnterName"
-        android:textSize="@dimen/new_task_tvEnterName"/>
+        android:layout_width="300dp"
+        android:layout_height="375sp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/custom_relative_layout">
 
-    <EditText
-        android:id="@+id/etEnterName"
-        android:layout_width="@dimen/new_task_etEnterNameWeight"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/new_task_etMargin"
-        android:layout_below="@+id/tvEnterName"
-        android:hint="@string/new_task_etEnterName"
-        android:importantForAutofill="no"/>
+        <TextView
+            android:id="@+id/tvEnterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/new_task_tvMarginTop"
+            android:layout_centerHorizontal="true"
+            android:text="@string/new_task_tvEnterName"
+            android:textStyle="bold"
+            android:textSize="@dimen/new_task_tvEnterName"/>
 
-    <Button
-        android:id="@+id/btnAddTask"
-        android:layout_width="@dimen/new_task_btnAddWeight"
-        android:layout_height="@dimen/new_task_btnAddHeight"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/new_task_etMargin"
-        android:layout_below="@+id/etEnterName"
-        android:text="@string/new_task_btnAdd"
-        android:background="@color/colorBtnAddTask"/>
+        <EditText
+            android:id="@+id/etEnterName"
+            android:layout_width="@dimen/new_task_etEnterNameWeight"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/new_task_etMargin"
+            android:layout_below="@+id/tvEnterName"
+            android:hint="@string/new_task_etEnterName"
+            android:importantForAutofill="no"/>
+
+        <Button
+            android:id="@+id/btnAddTask"
+            android:layout_width="@dimen/new_task_btnAddWeight"
+            android:layout_height="@dimen/new_task_btnAddHeight"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/new_task_etMargin"
+            android:layout_below="@+id/etEnterName"
+            android:text="@string/new_task_btnAdd"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_add_task"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -27,6 +27,18 @@ public class ActivityTaskDetails extends AppCompatActivity{
     }
 
     @Override
+    protected void onStop() {
+        finish();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        finish();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -55,8 +67,7 @@ public class ActivityTaskDetails extends AppCompatActivity{
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.create();
         builder.setTitle("About application")
-                .setMessage("This application is made by student Valerian Bahnik. \n" +
-                        "Application is meant to be used for simple to do lists.")
+                .setMessage("Application is meant to be used for simple to do lists.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -7,8 +7,9 @@
     android:gravity="center_horizontal"
     android:baselineAligned="false">
 
+
     <RelativeLayout
-        android:id="@+id/flText"
+        android:id="@+id/flList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -16,7 +17,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/flList"
+        android:id="@+id/flText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">

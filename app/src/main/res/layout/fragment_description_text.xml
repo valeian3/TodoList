@@ -2,32 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/new_task_etMargin" />
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/new_task_etMargin"
+        android:textSize="40sp"/>
 
     <TextView
         android:id="@+id/tvNameTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="90dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="@dimen/new_task_tvEnterName"
-        android:text="@string/tvSubTaskName" />
+        android:text="@string/tvSubTaskName"
+        android:textSize="25sp"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/etSubTaskName"
             android:layout_width="@dimen/fEditTextWight"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fDescription"
+            android:layout_marginStart="@dimen/fDescription"
             android:hint="@string/fHint"
             android:inputType="text" />
 
@@ -35,8 +39,10 @@
             android:id="@+id/btnAddSubTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fBtnAddSubTask"
-            android:text="@string/new_task_btnAdd" />
+            android:layout_marginStart="@dimen/fBtnAddSubTask"
+            android:text="@string/new_task_btnAdd"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_add_task"/>
 
     </RelativeLayout>
 
@@ -44,10 +50,10 @@
         android:id="@+id/btnDone"
         android:layout_width="@dimen/new_task_btnAddWeight"
         android:layout_height="@dimen/new_task_btnAddHeight"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/new_task_etMargin"
-        android:layout_below="@+id/etEnterName"
+        android:layout_gravity="center"
         android:text="@string/fBtnDone"
-        android:background="@color/colorBtnAddTask"/>
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button_add_task"/>
 
 </LinearLayout>

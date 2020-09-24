@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -45,6 +46,11 @@ public class SubTaskList extends Fragment {
         setUpUi(Layout);
 
         return Layout;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private void setUpUi(View layout){
@@ -123,6 +129,9 @@ public class SubTaskList extends Fragment {
                 databaseReference = FirebaseDatabase.getInstance().getReference("SubTask").child(taskId).child(id);
 
                 databaseReference.removeValue();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SubTaskList.this).attach(SubTaskList.this).commit();
 
                 alertDialog.dismiss();
             }

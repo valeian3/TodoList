@@ -146,12 +146,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAboutDialog(){
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.create();
         builder.setTitle("About application")
-                .setMessage("This application is made by student Valerian Bahnik. \n" +
-                        "Application is meant to be used for simple to do lists.")
+                .setMessage("Application is meant to be used for simple to do lists.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -197,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
                     databaseReference.setValue(task);
 
                     displayToast("Renamed task.");
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
                     alertDialog.dismiss();
                 }  else {
                     displayToast("Task name cannot stay empty.");
@@ -214,6 +216,10 @@ public class MainActivity extends AppCompatActivity {
                 databaseReference.removeValue();
 
                 displayToast("Task deleted.");
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
                 alertDialog.dismiss();
             }
         });

@@ -4,11 +4,11 @@
     <dimen name="elevationMedium">10dp</dimen>
     <dimen name="new_task_tvMarginTop">50dp</dimen>
     <dimen name="new_task_etMargin">30dp</dimen>
-    <dimen name="new_task_tvEnterName">30sp</dimen>
+    <dimen name="new_task_tvEnterName">25sp</dimen>
     <dimen name="new_task_etEnterNameWeight">200sp</dimen>
-    <dimen name="new_task_btnAddWeight">140sp</dimen>
-    <dimen name="new_task_btnAddHeight">70sp</dimen>
-    <dimen name="fDescription">0sp</dimen>
-    <dimen name="fEditTextWight">100sp</dimen>
-    <dimen name="fBtnAddSubTask">200sp</dimen>
+    <dimen name="new_task_btnAddWeight">100sp</dimen>
+    <dimen name="new_task_btnAddHeight">45sp</dimen>
+    <dimen name="fDescription">0dp</dimen>
+    <dimen name="fEditTextWight">150sp</dimen>
+    <dimen name="fBtnAddSubTask">230sp</dimen>
 </resources>

@@ -6,9 +6,11 @@
 
     <ListView
         android:id="@+id/lvTasks"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:longClickable="true">
+        android:longClickable="true"
+        android:divider="@null"
+        android:dividerHeight="0dp">
     </ListView>
 
     <android.support.design.widget.FloatingActionButton
@@ -17,11 +19,9 @@
         android:layout_height="wrap_content"
         android:elevation="@dimen/elevationMedium"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/marginMedium"
-        android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="@color/colorPrimary"
-        android:tint="@color/colorBtnAdd"/>
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/light_orange"/>
 
 </RelativeLayout>
